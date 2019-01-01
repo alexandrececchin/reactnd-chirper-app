@@ -14,9 +14,21 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        {this.props.loading ? <LoadingBar /> : <TweetPage match={{ params: { id: '8xf0y6ziyjabvozdd253nd' } }} />}
-      </div>
+      <Router>
+        <Fragment>
+          <LoadingBar />
+          <div className="container">
+            <Nav />
+            {this.props.loading ? null :
+              <div>
+                <Route path="/" exact component={Dashboard} />
+                <Route path="/tweet/:id" component={TweetPage} />
+                <Route path="/new" component={NewTweet} />
+              </div>
+            }
+          </div>
+        </Fragment>
+      </Router>
     )
   }
 }
